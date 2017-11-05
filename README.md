@@ -1,11 +1,11 @@
 # Team/Roles
-.. Jose Aguirre
+1. Jose Aguirre
 
-.. Chanel Aquino
+2. Chanel Aquino
 
-.. Brittany Arnold
+3. Brittany Arnold
 
-.. Simone Boyd
+4. Simone Boyd
 
 # Known Problems
 
