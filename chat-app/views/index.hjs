@@ -8,7 +8,7 @@
   <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg'); background-repeat: no-repeat; background-size: 100%;">
     <h1>Chat</h1>
     
-    <div id="chat-area" style="position:fixed; overflow-y: scroll; right: 500px; width: 50%; height: 50%;"></div>
+    <div id="chat-area" style="background-color: white; position:fixed; overflow-y: auto; right: 500px; width: 50%; height: 50%;"></div>
     <form id="messageForm">
       <textarea id="message"></textarea>
       <br>
@@ -32,10 +32,11 @@
             
             socket.on('new message', function(data) {
               console.log("here!!!!"); 
-              $chat.append('<p style="color: white;">' + data.msg + '</p>'); 
-            }); 
-            
+              $chat.append('<p style="padding-left: 10px;">' + data.msg + '</p>'); 
+             }); 
+             
         }); 
+        
     </script>
   </body>
 </html>
