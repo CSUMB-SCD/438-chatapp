@@ -9,6 +9,16 @@ a {
 
 .chat-message {
   font-family: 'Roboto', sans-serif;
-  font-size:28px;
+  font-size:14px;
   color:#335C81;
+}
+
+.user-id {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  color:#0E0E52;
+}
+
+div {
+  display: inline-block;
 }

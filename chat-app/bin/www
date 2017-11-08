@@ -37,7 +37,7 @@ io.sockets.on('connection', function(socket) {
     // console.log("connections array: ", connections);
     console.log("socket id: ", connections.id)
     console.log("data is: ", data); 
-    io.sockets.emit('new message', {msg: data, id: connections.id}); 
+    io.sockets.emit('new message', {msg: data, id: connections[0].id}); 
   })
 }); 
 
