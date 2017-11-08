@@ -19,6 +19,7 @@
     </form>
     
     <script>
+        var connectionLength = 0;
         document.addEventListener("DOMContentLoaded", function(event) { 
             //alert("hurrah");
             var socket = io.connect(); 
@@ -34,11 +35,15 @@
             }); 
             
             socket.on('new message', function(data) {
+            connectionLength = data.length;
+            
               console.log("here!!!!"); 
-              $chat.append('<div class=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR><BR><BR>'); 
+              $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR><BR><BR>'); 
             }); 
             
         }); 
+        
+        
     </script>
   </body>
 </html>
