@@ -7,11 +7,11 @@
   </head>
   <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg'); background-repeat: no-repeat; background-size: 100%;">
    
-    <div id="chat-area" style="background-color: white; position:fixed; overflow-y: auto; right: 500px; width: 50%; height: 50%;"></div>
+    <div id="chat-area" style="background-color: white; position:fixed; overflow-y: auto; left: 50px; width: 50%; height: 50%;"></div>
     <form id="messageForm">
-      <textarea id="message" style="position: fixed; top: 55%; right: 500px; width: 50%;resize: none;"></textarea>
+      <textarea id="message" style="position: fixed; top: 55%; left: 50px; width: 50%;resize: none;"></textarea>
       <br>
-      <input type="submit" value="Send" style="position:fixed; top: 65%; left: 64%;">
+      <input type="submit" value="Send" style="position:fixed; top: 65%; left: 50%;">
     </form>
     
     <script>
