@@ -2,40 +2,10 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg'); background-repeat: no-repeat; background-size: 100%;overflow: hidden;">
-   
-    <div id="chat-area" style="background-color: white; position:fixed; overflow-y: auto; left: 50px; width: 50%; height: 50%;"></div>
-    <form id="messageForm">
-      <textarea id="message" style="position: fixed; top: 55%; left: 50px; width: 50%;resize: none;"></textarea>
-      <br>
-      <input type="submit" value="Send" style="position:fixed; top: 65%; left: 50%;">
-    </form>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) { 
-            //alert("hurrah");
-            var socket = io.connect(); 
-            
-            var $messageForm = $("#messageForm"); 
-            var $message = $("#message"); 
-            var $chat = $("#chat-area"); 
-            
-            $messageForm.submit(function(e) {
-                e.preventDefault(); 
-                socket.emit('send message', $message.val()); 
-                $message.val(''); 
-            }); 
-            
-            socket.on('new message', function(data) {
-              console.log("here!!!!"); 
-              $chat.append('<p style="padding-left: 10px;">' + data.msg + '</p>'); 
-            
-             }); 
-             
-        }); 
-    </script>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }}</p>
   </body>
 </html>
