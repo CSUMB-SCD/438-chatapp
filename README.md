@@ -25,4 +25,5 @@
 * UI improvements to satisfy current design trends
 * User authentication
 * UX improvements (e.g., press "Enter" key to send message rather than pressing "Send" button)
+* Ability to send direct messages to other users
 
