@@ -20,8 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-<<<<<<< HEAD
-=======
 var io = require('socket.io').listen(server); 
 
 var connections = []; 
@@ -44,7 +42,6 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('new message', {msg: data, id: connections[0].id}); 
   })
 }); 
->>>>>>> 2d62374f2a0758d1cb83c544aa08a611d271cfe7
 
 /**
  * Listen on provided port, on all network interfaces.
