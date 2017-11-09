@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -21,5 +20,8 @@ a {
 }
 
 div {
-  display: inline-block;
+  display: block;
+}
+h1 {
+  text-align: center;
 }
