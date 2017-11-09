@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -25,12 +24,11 @@
     <script>
         var connectionLength = 0;
         document.addEventListener("DOMContentLoaded", function(event) { 
-            //alert("hurrah");
             var socket = io.connect(); 
-            
             var $messageForm = $("#messageForm"); 
             var $message = $("#message"); 
-            var $chat = $("#chat-area"); 
+            var $chat = $("#chat-area");
+            var $user = $("#listUsers");
             
             $messageForm.submit(function(e) {
                 e.preventDefault(); 
@@ -40,15 +38,18 @@
             
             socket.on('new message', function(data) {
             connectionLength = data.length;
-            
+
               console.log("here!!!!"); 
-              $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>'); 
-             }); 
-        }); 
+              $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
+              $user.append(data.user);
+              document.getElementById("listUsers").innerHTML = data.users;
+             });
+        });
     </script>
     </div>
     <div class="users", style="float: right;">
-    <h3> User 1 Information Here! </h3>
+    <h2 >Connected users : </h2>
+    <h2 id="listUsers"></h2>
     </div>
   </head>
 </html>

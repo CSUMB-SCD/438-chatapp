@@ -20,8 +20,9 @@ a {
 }
 
 div {
-  display: block;
+  display: inline-block;
 }
-h1 {
+h1, h2 {
   text-align: center;
+  padding-right: 45px;
 }
