@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+.chat-message {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  color:#335C81;
+  opacity: 1;
+}
+
+#user-id {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  opacity: 1;
+}
+
+div {
+  display: inline-block;
+}

@@ -3,9 +3,52 @@
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+<<<<<<< HEAD
   </head>
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
+=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg'); background-repeat: no-repeat; background-size: 100%;overflow: hidden;">
+   
+    <div id="chat-area" style="background-color: rgba(255, 255, 255, 0.4); position:fixed; overflow-y: auto; left: 50px; width: 50%; height: 50%;"></div>
+    <form id="messageForm">
+      <textarea id="message" style="position: fixed; top: 55%; left: 50px; width: 50%;resize: none; "></textarea>
+      <br>
+      <input type="submit" value="Send" style="position:fixed; top: 65%; left: 50%; ">
+    </form>
+    
+    <script>
+        var connectionLength = 0;
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            //alert("hurrah");
+            var socket = io.connect(); 
+            
+            var $messageForm = $("#messageForm"); 
+            var $message = $("#message"); 
+            var $chat = $("#chat-area"); 
+            
+            $messageForm.submit(function(e) {
+                e.preventDefault(); 
+                socket.emit('send message', $message.val()); 
+                $message.val(''); 
+            }); 
+            
+            socket.on('new message', function(data) {
+            connectionLength = data.length;
+            
+              console.log("here!!!!"); 
+              $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>'); 
+             }); 
+             
+        }); 
+        
+        
+    </script>
+>>>>>>> 2d62374f2a0758d1cb83c544aa08a611d271cfe7
   </body>
 </html>
