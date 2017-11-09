@@ -20,7 +20,7 @@
 * The chat log of the room should occupy at least 50% of the width of the screen
 
 # Known Problems
-
+* Scroll bar does not scroll to bottom when new message is being added to log
 # Future Improvements
 * UI improvements to satisfy current design trends
 * User authentication
