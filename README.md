@@ -22,5 +22,7 @@
 # Known Problems
 
 # Future Improvements
-
+* UI improvements to satisfy current design trends
+* User authentication
+* UX improvements (e.g., press "Enter" key to send message rather than pressing "Send" button)
 
