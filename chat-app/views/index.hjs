@@ -42,14 +42,19 @@
               console.log("here!!!!"); 
               $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
               $user.append(data.user);
-              document.getElementById("listUsers").innerHTML = data.users;
+              document.getElementById("numUsers").innerHTML = data.users;
+              var node = document.createElement("h3");
+              var textnode = document.createTextNode(data.id);
+              node.appendChild(textnode);
+              document.getElementById("listUsers").appendChild(node);
              });
         });
     </script>
     </div>
     <div class="users", style="float: right;">
-    <h2 >Connected users : </h2>
-    <h2 id="listUsers"></h2>
+    <h2 >Connected users : <h2 id="numUsers" />0</h2>
+    <h2> List of Users: </h2>
+    <h3 id="listUsers"/>
     </div>
   </head>
 </html>
