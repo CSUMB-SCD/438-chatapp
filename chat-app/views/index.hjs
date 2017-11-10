@@ -29,22 +29,34 @@
             var $message = $("#message"); 
             var $chat = $("#chat-area");
             var $user = $("#listUsers");
+            var person = '';
+            
+            if(person == ''){
+            person = prompt("Please enter your name");
+            document.getElementById("listUsers").innerHTML = person;
+            console.log(person)
+            }
+            var $name = $("person");
             
             $messageForm.submit(function(e) {
                 e.preventDefault(); 
-                socket.emit('send message', $message.val()); 
+                socket.emit('send message', $message.val());
+                socket.emit('name', $personName.val());
                 $message.val(''); 
             }); 
             
             socket.on('new message', function(data) {
             connectionLength = data.length;
 
-              console.log("here!!!!"); 
-              $chat.append('<div id=user-id>' + data.id + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
+              console.log("connection"); 
+              $chat.append('<div id=name>' + person + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
               $user.append(data.user);
               document.getElementById("numUsers").innerHTML = data.users;
+             });
+             
+            socket.on('name', function(data) {
               var node = document.createElement("h3");
-              var textnode = document.createTextNode(data.id);
+              var textnode = document.createTextNode(data.name);
               node.appendChild(textnode);
               document.getElementById("listUsers").appendChild(node);
              });

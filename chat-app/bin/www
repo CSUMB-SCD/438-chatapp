@@ -24,11 +24,12 @@ var io = require('socket.io').listen(server);
 
 var connections = [];
 var userCount = 0;
+var person;
 
 io.sockets.on('connection', function(socket) {
   connections.push(socket);
   userCount++;
-  console.log('Connected: %s sockets connected', connections.length); 
+  console.log('Connected: %s sockets connected', connections.length);
   
   socket.on("disconnect", function(data) {
      connections.splice(connections.indexOf(socket), 1); 
@@ -36,15 +37,22 @@ io.sockets.on('connection', function(socket) {
      console.log('Disconnected: %s sockets connected', connections.length);
   });
   
+  socket.on('name', function(data) {
+      console.log('Name', data.name);
+      person = data;
+    //  io.sockets.emit('name', {msg: data, name: person}); 
+  })
+  
   socket.on('send message', function(data) {
     //console.log("connections array: ", connections);
     //console.log("connections length: ", connections.length);
     //console.log("socket id: ", connections.id)
     // console.log("data is: ", data); 
     // console.log("position is: ", Object.keys(connections[0]).indexOf("id"));
-    io.sockets.emit('new message', {msg: data, id: connections.push(connections.id), users: userCount}); 
+    io.sockets.emit('new message', {msg: data, id: connections.push(connections.id), users: userCount, name: person}); 
   })
-}); 
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
