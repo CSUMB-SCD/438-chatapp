@@ -17,10 +17,10 @@
         <div id="input" style="float: left;">
         <form id="messageForm">
         <textarea id="message" style="position: fixed; top:65%; width: 44%; height: 25px; resize: none; "></textarea>
-        <input type="submit" value="Send" style="position: fixed; top: 65%; left: 46%; font-size: 20px;">
+        <input type="submit" value="Send" id="input" style="position: fixed; top: 65%; left: 46%; font-size: 20px;" />
         </form>
       </div>
-      
+  
     <script>
         var connectionLength = 0;
         document.addEventListener("DOMContentLoaded", function(event) { 
@@ -33,38 +33,39 @@
             
             if(person == ''){
             person = prompt("Please enter your name");
-            document.getElementById("listUsers").innerHTML = person;
-            console.log(person)
+            document.getElementById("welcome").innerHTML = person;
+            console.log(person);
             }
             var $name = $("person");
             
             $messageForm.submit(function(e) {
                 e.preventDefault(); 
                 socket.emit('send message', $message.val());
-                socket.emit('name', $personName.val());
+                socket.emit('name', person);
                 $message.val(''); 
             }); 
             
-            socket.on('new message', function(data) {
-            connectionLength = data.length;
-
-              console.log("connection"); 
-              $chat.append('<div id=name>' + person + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
-              $user.append(data.user);
-              document.getElementById("numUsers").innerHTML = data.users;
-             });
-             
             socket.on('name', function(data) {
               var node = document.createElement("h3");
               var textnode = document.createTextNode(data.name);
               node.appendChild(textnode);
               document.getElementById("listUsers").appendChild(node);
              });
+            
+            socket.on('new message', function(data) {
+            connectionLength = data.length;
+
+              console.log("connection"); 
+              $chat.append('<div id=name>' + data.name + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
+              $user.append(data.user);
+              document.getElementById("numUsers").innerHTML = data.users;
+             });
         });
     </script>
     </div>
     <div class="users", style="float: right;">
-    <h2 >Connected users : <h2 id="numUsers" />0</h2>
+    <h2 >Connected users<h2 id="numUsers" />0</h2>
+    <h2>User Name of Chat app<h2 id="welcome" /></h2>
     <h2> List of Users: </h2>
     <h3 id="listUsers"/>
     </div>
