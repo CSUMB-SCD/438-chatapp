@@ -6,11 +6,13 @@ a {
   color: #00B7FF;
 }
 
-.chat-message {
+.chat-message .name{
+  float: right;
   font-family: 'Roboto', sans-serif;
-  font-size:14px;
+  font-size: 20px;
   color:#335C81;
   opacity: 1;
+  padding: 10px;
 }
 
 #user-id {

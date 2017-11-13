@@ -7,8 +7,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
-  
-      <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg');
+      
+      <body onunload="goodby()"; style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg');
       background-repeat: no-repeat; background-size: 100%; overflow: hidden;" >
       <h1>{{ title }} Chat App</h1>
       
@@ -20,7 +20,7 @@
         <input type="submit" value="Send" id="input" style="position: fixed; top: 65%; left: 46%; font-size: 20px;" />
         </form>
       </div>
-  
+
     <script>
         var connectionLength = 0;
         document.addEventListener("DOMContentLoaded", function(event) { 
@@ -29,6 +29,7 @@
             var $message = $("#message"); 
             var $chat = $("#chat-area");
             var $user = $("#listUsers");
+            var $name = $("#name");
             var person = '';
             
             if(person == ''){
@@ -36,16 +37,15 @@
             document.getElementById("welcome").innerHTML = person;
             console.log(person);
             }
-            var $name = $("person");
             
             $messageForm.submit(function(e) {
-                e.preventDefault(); 
-                socket.emit('send message', $message.val());
+                e.preventDefault();
                 socket.emit('name', person);
-                $message.val(''); 
+                socket.emit('send message', $message.val());
+                $message.val('');
             }); 
             
-            socket.on('name', function(data) {
+            socket.on('list', function(data) {
               var node = document.createElement("h3");
               var textnode = document.createTextNode(data.name);
               node.appendChild(textnode);
@@ -56,10 +56,17 @@
             connectionLength = data.length;
 
               console.log("connection"); 
-              $chat.append('<div id=name>' + data.name + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
-              $user.append(data.user);
+              $chat.append('<div class=name>' + data.name + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
               document.getElementById("numUsers").innerHTML = data.users;
+              
              });
+             
+            function goodby(){
+            $messageForm.submit(function(e) {
+              e.preventDefault();
+              socket.emit('disconnect', person);
+            });
+          }
         });
     </script>
     </div>
@@ -69,5 +76,5 @@
     <h2> List of Users: </h2>
     <h3 id="listUsers"/>
     </div>
-  </head>
+  </body>
 </html>
