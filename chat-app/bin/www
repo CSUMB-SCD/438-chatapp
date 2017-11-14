@@ -26,20 +26,23 @@ io.sockets.on('connection', function(socket) {
      connections.splice(connections.indexOf(socket), 1); 
      userCount--;
      console.log('Disconnected: %s sockets connected', connections.length);
-     namePerson.splice(namePerson.indexOf(socket), 1)
+     namePerson.splice(namePerson.indexOf(socket), 1);
+     io.sockets.emit('list', namePerson);
   });
   
   socket.on('name', function(data) {
     personName = data;
     console.log('Name', data);
-  })
+    namePerson.push(personName);
+    io.sockets.emit('list', namePerson);
+  });
   
   namePerson.push(personName);
-  
+
   socket.on('send message', function(data) {
     console.log('Data message', data);
     io.sockets.emit('new message', {msg: data, id: connections.push(connections.id), users: userCount, name: personName});
-  })
+  });
 });
 
 // Listen on provided port, on all network interfaces.
