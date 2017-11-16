@@ -24,9 +24,10 @@ io.sockets.on('connection', function(socket) {
   
   socket.on("disconnect", function(data) {
      connections.splice(connections.indexOf(socket), 1); 
-     userCount--;
      console.log('Disconnected: %s sockets connected', connections.length);
      namePerson.splice(namePerson.indexOf(socket), 1);
+     userCount--;
+     
      io.sockets.emit('list', namePerson);
   });
   
