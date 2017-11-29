@@ -29,6 +29,7 @@
             var $name = $("#name");
             var person = '';
             
+            // This prompt new user for name
             if(person == ''){
               person = prompt("Please enter your name");
               document.getElementById("welcome").innerHTML = person;
@@ -36,13 +37,15 @@
               console.log(person);
             }
             
+          // Sends message to the server
             $messageForm.submit(function(e) {
                 e.preventDefault();
                 console.log("about to submit:  message: " +  $message.val()); 
                 socket.emit('send message',{message: $message.val(), name: person});
                 $message.val('');
             }); 
-             
+          
+          // Gets list of names that are on the chat app and makes list
              socket.on('list', function(namePerson) {
              var text, i, x;
              var temp = new Array();
@@ -55,6 +58,7 @@
               document.getElementById("numUsers").innerHTML = namePerson.length;
              });
             
+          // Gets new message from the server and displays it on the app
             socket.on('new message', function(data) {
               console.log("connection"); 
               $chat.append('<div class=name>' + data.name + '</div>: <div class=chat-message>' + data.message + '</div><BR><BR>');
