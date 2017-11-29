@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   </head>
-      <body onunload="goodby()"; style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg');
+      <body style="background-image: url('http://i0.kym-cdn.com/entries/icons/original/000/002/232/bullet_cat.jpg');
       background-repeat: no-repeat; background-size: 100%; overflow: hidden;" >
       <h1>{{ title }} Chat App</h1>
       <div id="chat-area" style="background-color: rgba(255, 255, 255, 0.4);
@@ -30,57 +30,35 @@
             var person = '';
             
             if(person == ''){
-            person = prompt("Please enter your name");
-            document.getElementById("welcome").innerHTML = person;
-            console.log(person);
+              person = prompt("Please enter your name");
+              document.getElementById("welcome").innerHTML = person;
+              socket.emit('newName', person);
+              console.log(person);
             }
             
             $messageForm.submit(function(e) {
                 e.preventDefault();
-                socket.emit('name', person);
-                socket.emit('send message', $message.val());
+                console.log("about to submit:  message: " +  $message.val()); 
+                socket.emit('send message',{message: $message.val(), name: person});
                 $message.val('');
             }); 
              
              socket.on('list', function(namePerson) {
              var text, i, x;
              var temp = new Array();
-             namePerson.sort();
-
-            for (x = 0; x < namePerson.length; x++){
-                  if (namePerson[x] == namePerson[x+1]){
-                      continue;
-                      }
-                    temp[temp.length] = namePerson[x];
-                    }
 
               text = "<ul>";
-              for (i = 0; i < temp.length; i++) {
-                  text += "<li>" + temp[i] + "</li>";
-              }
-              text += "</ul>";
+              for (i = 0; i < namePerson.length; i++)
+                  text += "<li>" + namePerson[i] + "</li>";
+                  text += "</ul>";
               document.getElementById("listUsers").innerHTML = text;
+              document.getElementById("numUsers").innerHTML = namePerson.length;
              });
             
             socket.on('new message', function(data) {
-            connectionLength = data.length;
-
               console.log("connection"); 
-              $chat.append('<div class=name>' + data.name + '</div>: <div class=chat-message>' + data.msg + '</div><BR><BR>');
-              document.getElementById("numUsers").innerHTML = data.users;
-              var test = data.users;
-              if (test == 1){
-                  namePerson.shift();
-                  console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkk', namePerson);
-                  }
+              $chat.append('<div class=name>' + data.name + '</div>: <div class=chat-message>' + data.message + '</div><BR><BR>');
              });
-             
-            function goodby(){
-            $messageForm.submit(function(e) {
-              e.preventDefault();
-              socket.emit('disconnect', person);
-            });
-          }
         });
     </script>
     </div>
